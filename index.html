@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Colombia Trip 2026</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="bg-gray-50">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState } = React;
+
+    // Inline SVG icon components (replacing lucide-react)
+    const Plane = ({ className }) => (
+      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21 4 19 2c-2-2-4-2-5.5-.5L10 5 1.8 6.2c0 0-.5.5 0 1l4.2 4.2L10 11l-2 5.2 1.5 1.5 3-2.5 2.5 2.5 1.5 1.5L17.8 19.2z"/>
+      </svg>
+    );
+    const Hotel = ({ className }) => (
+      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M18 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/><path d="m9 22 .01-4"/><path d="m15 22 .01-4"/><path d="M9 7h1"/><path d="M14 7h1"/><path d="M9 11h1"/><path d="M14 11h1"/>
+      </svg>
+    );
+    const MapPin = ({ className }) => (
+      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>
+      </svg>
+    );
+    const Calendar = ({ className }) => (
+      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/>
+      </svg>
+    );
+    const Clock = ({ className }) => (
+      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+      </svg>
+    );
+    const Users = ({ className }) => (
+      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+    );
+    const CheckCircle = ({ className }) => (
+      <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+      </svg>
+    );
+
+    function ColombiaTripItinerary() {
+      const tripData = {
+        passengers: [
+          { name: "Miguel", passport: "Portuguese" },
+          { name: "Vinna", passport: "Filipino (Malta Residence)" },
+          { name: "Son (2yo)", passport: "Portuguese" }
+        ],
+        segments: [
+          {
+            date: "Feb 23, 2026",
+            day: "Sunday",
+            type: "flight",
+            flights: [
+              {
+                number: "LH1134",
+                route: "Barcelona (BCN) → Frankfurt (FRA)",
+                departure: "06:20",
+                arrival: "08:45",
+                duration: "2h 25m",
+                class: "Economy Classic",
+                bookingCode: "OG6EYF"
+              },
+              {
+                number: "LH542",
+                route: "Frankfurt (FRA) → Bogotá (BOG)",
+                departure: "13:30",
+                arrival: "19:35",
+                duration: "12h 05m",
+                class: "Economy Classic · 787-9 Allegris · Row 20 (extra legroom)",
+                bookingCode: "OG6EYF",
+                note: "Long haul — arrive evening Bogotá"
+              }
+            ]
+          },
+          {
+            date: "Feb 23–25",
+            type: "accommodation",
+            location: "Bogotá",
+            details: {
+              name: "Hotel Santa Lucia Boutique Spa",
+              checkin: "Mon, Feb 23 from 15:00",
+              checkout: "Wed, Feb 25 until 12:00",
+              nights: "2 nights",
+              room: "Junior Suite",
+              guests: "2 adults, 1 child (2yo)",
+              confirmation: "6184704459",
+              pin: "6684",
+              cost: "£81",
+              perks: "Free breakfast · Free room upgrade · 10% Genius discount",
+              address: "Calle 18 # 6-27, 110311 Bogotá",
+              status: "✓ Confirmed",
+              note: "Arrival time approved: 20:00–21:00"
+            }
+          },
+          {
+            date: "Feb 24, 2026",
+            day: "Monday",
+            type: "flight",
+            flights: [
+              {
+                number: "AV8238",
+                route: "Bogotá (BOG) → Cali (CLO)",
+                departure: "11:00",
+                arrival: "12:00",
+                duration: "1h 00m",
+                class: "Economy",
+                bookingCode: "AU6WVT"
+              }
+            ]
+          },
+          {
+            date: "Feb 24–25",
+            type: "accommodation",
+            location: "Cali",
+            details: {
+              name: "Friend's Property",
+              status: "✓ Confirmed",
+              note: "Staying with friends"
+            }
+          },
+          {
+            date: "Feb 25, 2026",
+            day: "Tuesday",
+            type: "flight",
+            flights: [
+              {
+                number: "AV8063",
+                route: "Cali (CLO) → Bogotá (BOG)",
+                departure: "04:21",
+                arrival: "05:35",
+                duration: "1h 14m",
+                class: "Economy",
+                bookingCode: "BGWEMN",
+                note: "Early morning connection"
+              },
+              {
+                number: "AV9741",
+                route: "Bogotá (BOG) → Leticia (LET)",
+                departure: "09:52",
+                arrival: "12:42",
+                duration: "2h 50m",
+                class: "Economy",
+                bookingCode: "BGWEMN"
+              }
+            ]
+          },
+          {
+            date: "Feb 25 – Mar 1",
+            type: "accommodation",
+            location: "Leticia (Amazon)",
+            details: {
+              name: "Hostal Las Mariposas",
+              nights: "4 nights",
+              confirmation: "5645185227",
+              pin: "8204",
+              cost: "£46 / COP 231,000 (~€51)",
+              status: "✓ Confirmed"
+            }
+          },
+          {
+            date: "Mar 1, 2026",
+            day: "Saturday",
+            type: "flight",
+            flights: [
+              {
+                number: "AV9740",
+                route: "Leticia (LET) → Bogotá (BOG)",
+                departure: "13:40",
+                arrival: "16:43",
+                duration: "3h 03m",
+                class: "Economy",
+                bookingCode: "BGWEMN"
+              }
+            ]
+          },
+          {
+            date: "Mar 1–9",
+            type: "accommodation",
+            location: "Cali",
+            details: {
+              name: "Friend's Property",
+              status: "✓ Confirmed",
+              note: "Return to Cali, staying with friends"
+            }
+          },
+          {
+            date: "Mar 9, 2026",
+            day: "Monday",
+            type: "flight",
+            flights: [
+              {
+                number: "AV9204",
+                route: "Cali (CLO) → Bogotá (BOG)",
+                departure: "16:05",
+                arrival: "17:10",
+                duration: "1h 05m",
+                class: "Economy",
+                note: "~6h at BOG before international departure"
+              },
+              {
+                number: "LH543",
+                route: "Bogotá (BOG) → Frankfurt (FRA)",
+                departure: "23:30",
+                arrival: "15:55+1",
+                duration: "10h 25m",
+                class: "Economy Classic",
+                bookingCode: "OG6EYF",
+                note: "Overnight — arrives Frankfurt next day Mar 10"
+              }
+            ]
+          },
+          {
+            date: "Mar 10, 2026",
+            day: "Tuesday",
+            type: "flight",
+            flights: [
+              {
+                number: "LH1131",
+                route: "Frankfurt (FRA) → Barcelona (BCN)",
+                departure: "20:35",
+                arrival: "23:00",
+                duration: "2h 25m",
+                class: "Economy Classic",
+                bookingCode: "OG6EYF",
+                note: "Arrive home late evening 🏠"
+              }
+            ]
+          }
+        ]
+      };
+
+      const FlightCard = ({ flight }) => (
+        <div className="border-l-4 pl-4 py-3 border-blue-500 bg-blue-50 rounded-r-lg mb-2">
+          <div className="flex items-start justify-between">
+            <div className="flex-1">
+              <div className="flex items-center gap-2 mb-1">
+                <Plane className="w-4 h-4 text-blue-600" />
+                <span className="font-semibold text-gray-800">{flight.number}</span>
+                {flight.class && (
+                  <span className="text-xs text-gray-600 bg-white px-2 py-0.5 rounded">{flight.class}</span>
+                )}
+              </div>
+              <div className="text-sm font-medium text-gray-900 mb-1">{flight.route}</div>
+              {flight.departure && (
+                <div className="flex items-center gap-4 text-sm text-gray-700">
+                  <span className="flex items-center gap-1">
+                    <Clock className="w-3 h-3" />
+                    {flight.departure} → {flight.arrival}
+                  </span>
+                  <span className="text-gray-500">({flight.duration})</span>
+                </div>
+              )}
+              {flight.bookingCode && (
+                <div className="text-xs text-gray-500 mt-1">Booking: <span className="font-mono font-semibold">{flight.bookingCode}</span></div>
+              )}
+              {flight.note && (
+                <div className="text-xs text-blue-700 italic mt-1">{flight.note}</div>
+              )}
+            </div>
+          </div>
+        </div>
+      );
+
+      const AccommodationCard = ({ details, location }) => (
+        <div className="border-l-4 border-green-500 bg-green-50 pl-4 py-3 rounded-r-lg">
+          <div className="flex items-start gap-2">
+            <Hotel className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+            <div className="flex-1">
+              <div className="font-semibold text-gray-800 mb-1">{details.name}</div>
+              <div className="flex items-center gap-1 text-sm text-gray-700 mb-1">
+                <MapPin className="w-3 h-3" />
+                {location}
+              </div>
+              {details.room && <div className="text-sm text-gray-700 font-medium">{details.room}</div>}
+              {details.checkin && (
+                <div className="text-xs text-gray-600 mt-1">
+                  <div>Check-in: {details.checkin}</div>
+                  <div>Check-out: {details.checkout}</div>
+                </div>
+              )}
+              {details.nights && (
+                <div className="text-sm text-gray-600 mt-1">{details.nights}{details.guests ? ` · ${details.guests}` : ''}</div>
+              )}
+              {details.confirmation && (
+                <div className="text-xs text-gray-600 mt-1 font-mono">
+                  Confirmation: {details.confirmation} · PIN: {details.pin}
+                </div>
+              )}
+              {details.address && <div className="text-xs text-gray-600 mt-1">{details.address}</div>}
+              {details.cost && <div className="text-sm text-gray-700 font-semibold mt-1">{details.cost}</div>}
+              {details.perks && <div className="text-xs text-green-700 mt-1">{details.perks}</div>}
+              <div className={`text-xs mt-1 font-medium ${details.status.includes('✓') ? 'text-green-700' : 'text-yellow-700'}`}>
+                {details.status}
+              </div>
+              {details.note && <div className="text-xs text-gray-600 italic mt-1">{details.note}</div>}
+            </div>
+          </div>
+        </div>
+      );
+
+      return (
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 p-4 md:p-8">
+          <div className="max-w-5xl mx-auto">
+
+            {/* Header */}
+            <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-6">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="bg-gradient-to-r from-blue-600 to-green-600 p-3 rounded-xl">
+                  <Plane className="w-8 h-8 text-white" />
+                </div>
+                <div>
+                  <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Colombia Trip 2026 🇨🇴</h1>
+                  <p className="text-gray-500">Feb 23 – Mar 10 · 16 days</p>
+                </div>
+              </div>
+
+              {/* Passengers */}
+              <div className="flex items-center gap-2 mb-4 flex-wrap">
+                <Users className="w-4 h-4 text-gray-500" />
+                <span className="text-sm font-medium text-gray-600">Travelers:</span>
+                {tripData.passengers.map((p, i) => (
+                  <span key={i} className="text-sm bg-blue-100 text-blue-800 px-3 py-1 rounded-full">
+                    {p.name} · {p.passport}
+                  </span>
+                ))}
+              </div>
+
+              {/* Alerts */}
+              <div className="space-y-2">
+                <div className="flex items-start gap-2 bg-green-50 border border-green-200 rounded-lg p-3">
+                  <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                  <div className="text-sm">
+                    <span className="font-semibold text-green-800">All flights booked · </span>
+                    <span className="text-green-700 font-mono text-xs">OG6EYF · AU6WVT · BGWEMN · AV9204</span>
+                  </div>
+                </div>
+                <div className="flex items-start gap-2 bg-green-50 border border-green-200 rounded-lg p-3">
+                  <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                  <div className="text-sm">
+                    <span className="font-semibold text-green-800">All accommodation confirmed · </span>
+                    <span className="text-green-700">Santa Lucia · Las Mariposas · Friend's property (Cali)</span>
+                  </div>
+                </div>
+                <div className="flex items-start gap-2 bg-green-50 border border-green-200 rounded-lg p-3">
+                  <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                  <div className="text-sm">
+                    <span className="font-semibold text-green-800">Visa-free for all passengers · </span>
+                    <span className="text-green-700">Colombia 90 days · Brazil (Tabatinga) 90 days</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Timeline */}
+            <div className="space-y-4">
+              {tripData.segments.map((segment, idx) => (
+                <div key={idx} className="bg-white rounded-xl shadow-md p-4 md:p-6 hover:shadow-lg transition-shadow">
+                  <div className="flex items-center gap-3 mb-3">
+                    <Calendar className="w-5 h-5 text-gray-500" />
+                    <div>
+                      <h2 className="text-lg font-bold text-gray-800">{segment.date}</h2>
+                      {segment.day && <p className="text-xs text-gray-500 uppercase tracking-wide">{segment.day}</p>}
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    {segment.type === 'flight' && segment.flights.map((flight, fidx) => (
+                      <FlightCard key={fidx} flight={flight} />
+                    ))}
+                    {segment.type === 'accommodation' && (
+                      <AccommodationCard details={segment.details} location={segment.location} />
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Footer */}
+            <div className="mt-8 text-center text-xs text-gray-400 pb-4">
+              <p>BCN → BOG → LET → CLO → BOG → FRA → BCN · Generated with Claude</p>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<ColombiaTripItinerary />);
+  </script>
+</body>
+</html>
