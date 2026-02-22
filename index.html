@@ -107,53 +107,17 @@
             }
           },
           {
-            date: "Feb 24, 2026",
-            day: "Monday",
-            type: "flight",
-            flights: [
-              {
-                number: "AV8238",
-                route: "Bogotá (BOG) → Cali (CLO)",
-                departure: "11:00",
-                arrival: "12:00",
-                duration: "1h 00m",
-                class: "Economy",
-                bookingCode: "AU6WVT"
-              }
-            ]
-          },
-          {
-            date: "Feb 24–25",
-            type: "accommodation",
-            location: "Cali",
-            details: {
-              name: "Friend's Property",
-              status: "✓ Confirmed",
-              note: "Staying with friends"
-            }
-          },
-          {
             date: "Feb 25, 2026",
             day: "Tuesday",
             type: "flight",
             flights: [
               {
-                number: "AV8063",
-                route: "Cali (CLO) → Bogotá (BOG)",
-                departure: "04:21",
-                arrival: "05:35",
-                duration: "1h 14m",
-                class: "Economy",
-                bookingCode: "BGWEMN",
-                note: "Early morning connection"
-              },
-              {
-                number: "AV9741",
+                number: "AV9486",
                 route: "Bogotá (BOG) → Leticia (LET)",
-                departure: "09:52",
-                arrival: "12:42",
-                duration: "2h 50m",
-                class: "Economy",
+                departure: "10:05",
+                arrival: "12:10",
+                duration: "2h 05m",
+                class: "Classic · Seat 28E · 1PC baggage",
                 bookingCode: "BGWEMN"
               }
             ]
@@ -184,17 +148,37 @@
                 duration: "3h 03m",
                 class: "Economy",
                 bookingCode: "BGWEMN"
+              },
+              {
+                number: "AV8238",
+                route: "Bogotá (BOG) → Cali (CLO)",
+                departure: "TBC",
+                arrival: "TBC",
+                duration: "~1h",
+                class: "Economy",
+                bookingCode: "AU6WVT",
+                note: "Same-day connection to Cali"
               }
             ]
           },
           {
-            date: "Mar 1–9",
+            date: "Mar 1–6",
             type: "accommodation",
             location: "Cali",
             details: {
               name: "Friend's Property",
               status: "✓ Confirmed",
-              note: "Return to Cali, staying with friends"
+              note: "Staying with friends"
+            }
+          },
+          {
+            date: "Mar 6–9",
+            type: "accommodation",
+            location: "Buga",
+            details: {
+              name: "Friend's arrangement",
+              status: "✓ Confirmed",
+              note: "Friend sorting accommodation"
             }
           },
           {
@@ -390,7 +374,7 @@
 
             {/* Footer */}
             <div className="mt-8 text-center text-xs text-gray-400 pb-4">
-              <p>BCN → BOG → LET → CLO → BOG → FRA → BCN · Generated with Claude</p>
+              <p>BCN → FRA → BOG → LET → BOG → CLO → BOG → FRA → BCN · Generated with Claude</p>
             </div>
           </div>
         </div>
